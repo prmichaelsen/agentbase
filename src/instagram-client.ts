@@ -165,10 +165,15 @@ export class InstagramClient {
   async getConversations(
     userId: string = 'me',
     platform?: string,
-    userIdFilter?: string
+    userIdFilter?: string,
+    fields?: string[]
   ): Promise<any> {
+    const defaultFields = ['id', 'updated_time', 'participants'];
+    const fieldsParam = fields?.join(',') || defaultFields.join(',');
+    
     const params: Record<string, string> = {
-      platform: platform || 'instagram'
+      platform: platform || 'instagram',
+      fields: fieldsParam
     };
     
     if (userIdFilter) {
@@ -180,13 +185,15 @@ export class InstagramClient {
 
   async getConversationMessages(
     conversationId: string,
-    fields?: string[]
+    fields?: string[],
+    limit: number = 25
   ): Promise<any> {
     const defaultFields = ['id', 'created_time', 'from', 'to', 'message'];
     const fieldsParam = fields?.join(',') || defaultFields.join(',');
     
-    return this.makeRequest(`/${conversationId}`, {
-      fields: fieldsParam
+    return this.makeRequest(`/${conversationId}/messages`, {
+      fields: fieldsParam,
+      limit: limit.toString()
     });
   }
 
