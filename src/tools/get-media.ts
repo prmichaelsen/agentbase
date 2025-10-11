@@ -24,6 +24,10 @@ export const getMediaTool = {
           type: 'string'
         },
         description: 'Fields to retrieve. Available: id, caption, media_type, media_url, permalink, thumbnail_url, timestamp, like_count, comments_count. If not provided, returns basic fields.'
+      },
+      after: {
+        type: 'string',
+        description: 'Pagination cursor for fetching the next page of results. Use the value from paging.cursors.after in the previous response.'
       }
     }
   }
@@ -36,9 +40,10 @@ export async function handleGetMedia(
   const userId = args.user_id || 'me';
   const limit = args.limit || 25;
   const fields = args.fields;
+  const after = args.after;
 
   try {
-    const media = await client.getUserMedia(userId, fields, limit);
+    const media = await client.getUserMedia(userId, fields, limit, after);
     return JSON.stringify(media, null, 2);
   } catch (error) {
     throw new Error(`Failed to get media: ${error instanceof Error ? error.message : String(error)}`);

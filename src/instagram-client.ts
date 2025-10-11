@@ -60,7 +60,8 @@ export class InstagramClient {
   async getUserMedia(
     userId: string = 'me',
     fields?: string[],
-    limit: number = 25
+    limit: number = 25,
+    after?: string
   ): Promise<any> {
     const defaultFields = [
       'id',
@@ -73,10 +74,16 @@ export class InstagramClient {
     ];
     const fieldsParam = fields?.join(',') || defaultFields.join(',');
     
-    return this.makeRequest(`/${userId}/media`, {
+    const params: Record<string, string> = {
       fields: fieldsParam,
       limit: limit.toString()
-    });
+    };
+    
+    if (after) {
+      params.after = after;
+    }
+    
+    return this.makeRequest(`/${userId}/media`, params);
   }
 
   async getMediaDetails(mediaId: string, fields?: string[]): Promise<any> {
