@@ -22,6 +22,14 @@ import {
   handleGetMediaInsights,
   handleGetUserInsights
 } from './tools/get-insights.js';
+import { createMediaContainerTool, handleCreateMediaContainer } from './tools/create-media-container.js';
+import { publishMediaContainerTool, handlePublishMediaContainer } from './tools/publish-media-container.js';
+import {
+  getConversationsTool,
+  getConversationMessagesTool,
+  handleGetConversations,
+  handleGetConversationMessages
+} from './tools/get-conversations.js';
 
 // Environment variable for access token
 const ACCESS_TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN;
@@ -56,7 +64,11 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
       getMediaDetailsTool,
       getCommentsTool,
       getMediaInsightsTool,
-      getUserInsightsTool
+      getUserInsightsTool,
+      createMediaContainerTool,
+      publishMediaContainerTool,
+      getConversationsTool,
+      getConversationMessagesTool
     ]
   };
 });
@@ -91,6 +103,22 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
       case 'instagram_get_user_insights':
         result = await handleGetUserInsights(instagramClient, args);
+        break;
+
+      case 'instagram_create_media_container':
+        result = await handleCreateMediaContainer(instagramClient, args);
+        break;
+
+      case 'instagram_publish_media_container':
+        result = await handlePublishMediaContainer(instagramClient, args);
+        break;
+
+      case 'instagram_get_conversations':
+        result = await handleGetConversations(instagramClient, args);
+        break;
+
+      case 'instagram_get_conversation_messages':
+        result = await handleGetConversationMessages(instagramClient, args);
         break;
 
       default:

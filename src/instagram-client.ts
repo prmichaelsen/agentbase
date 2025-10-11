@@ -11,17 +11,34 @@ export class InstagramClient {
 
   async makeRequest<T>(
     endpoint: string,
-    params: Record<string, string> = {}
+    params: Record<string, string> = {},
+    method: 'GET' | 'POST' = 'GET'
   ): Promise<T> {
     const url = new URL(`${API_BASE_URL}${endpoint}`);
-    url.searchParams.append('access_token', this.accessToken);
     
-    for (const [key, value] of Object.entries(params)) {
-      url.searchParams.append(key, value);
+    let fetchOptions: RequestInit = {
+      method
+    };
+
+    if (method === 'GET') {
+      url.searchParams.append('access_token', this.accessToken);
+      for (const [key, value] of Object.entries(params)) {
+        url.searchParams.append(key, value);
+      }
+    } else if (method === 'POST') {
+      const formData = new URLSearchParams();
+      formData.append('access_token', this.accessToken);
+      for (const [key, value] of Object.entries(params)) {
+        formData.append(key, value);
+      }
+      fetchOptions.body = formData;
+      fetchOptions.headers = {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      };
     }
 
-    const response = await fetch(url.toString());
-    const data = await response.json();
+    const response = await fetch(url.toString(), fetchOptions);
+    const data = await response.json() as any;
 
     if (!response.ok) {
       const error = data.error as GraphAPIError;
@@ -126,7 +143,7 @@ export class InstagramClient {
       params.caption = caption;
     }
 
-    return this.makeRequest(`/${userId}/media`, params);
+    return this.makeRequest(`/${userId}/media`, params, 'POST');
   }
 
   async publishMediaContainer(
@@ -135,6 +152,34 @@ export class InstagramClient {
   ): Promise<any> {
     return this.makeRequest(`/${userId}/media_publish`, {
       creation_id: creationId
+    }, 'POST');
+  }
+
+  async getConversations(
+    userId: string = 'me',
+    platform?: string,
+    userIdFilter?: string
+  ): Promise<any> {
+    const params: Record<string, string> = {
+      platform: platform || 'instagram'
+    };
+    
+    if (userIdFilter) {
+      params.user_id = userIdFilter;
+    }
+
+    return this.makeRequest(`/${userId}/conversations`, params);
+  }
+
+  async getConversationMessages(
+    conversationId: string,
+    fields?: string[]
+  ): Promise<any> {
+    const defaultFields = ['id', 'created_time', 'from', 'to', 'message'];
+    const fieldsParam = fields?.join(',') || defaultFields.join(',');
+    
+    return this.makeRequest(`/${conversationId}`, {
+      fields: fieldsParam
     });
   }
 }
