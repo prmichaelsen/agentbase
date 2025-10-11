@@ -1,0 +1,27 @@
+{
+  "name": "agentbase",
+  "version": "1.0.0",
+  "description": "Instagram MCP server using Graph API v21.0",
+  "type": "module",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "node esbuild.build.js",
+    "watch": "node esbuild.watch.js",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "instagram",
+    "graph-api"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "esbuild": "^0.24.2",
+    "typescript": "^5.7.2"
+  }
+}
