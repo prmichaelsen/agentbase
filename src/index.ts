@@ -30,6 +30,7 @@ import {
   handleGetConversations,
   handleGetConversationMessages
 } from './tools/get-conversations.js';
+import { sendMessageTool, handleSendMessage } from './tools/send-message.js';
 
 // Environment variable for access token
 const ACCESS_TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN;
@@ -68,7 +69,8 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
       createMediaContainerTool,
       publishMediaContainerTool,
       getConversationsTool,
-      getConversationMessagesTool
+      getConversationMessagesTool,
+      sendMessageTool
     ]
   };
 });
@@ -119,6 +121,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
       case 'instagram_get_conversation_messages':
         result = await handleGetConversationMessages(instagramClient, args);
+        break;
+
+      case 'instagram_send_message':
+        result = await handleSendMessage(instagramClient, args);
         break;
 
       default:

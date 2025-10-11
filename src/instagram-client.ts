@@ -189,4 +189,17 @@ export class InstagramClient {
       fields: fieldsParam
     });
   }
+
+  async sendMessage(
+    userId: string = 'me',
+    recipientId: string,
+    message: string
+  ): Promise<any> {
+    const params: Record<string, string> = {
+      recipient: JSON.stringify({ id: recipientId }),
+      message: JSON.stringify({ text: message })
+    };
+
+    return this.makeRequest(`/${userId}/messages`, params, 'POST');
+  }
 }
