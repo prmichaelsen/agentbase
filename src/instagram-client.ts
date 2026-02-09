@@ -188,12 +188,13 @@ export class InstagramClient {
     fields?: string[],
     limit: number = 25
   ): Promise<any> {
-    const defaultFields = ['id', 'created_time', 'from', 'to', 'message'];
-    const fieldsParam = fields?.join(',') || defaultFields.join(',');
+    // Instagram API requires messages as a nested field query
+    const defaultMessageFields = ['id', 'created_time', 'from', 'to', 'message'];
+    const messageFieldsParam = fields?.join(',') || defaultMessageFields.join(',');
     
-    return this.makeRequest(`/${conversationId}/messages`, {
-      fields: fieldsParam,
-      limit: limit.toString()
+    // Query the conversation with messages as a nested field
+    return this.makeRequest(`/${conversationId}`, {
+      fields: `messages.limit(${limit}){${messageFieldsParam}}`
     });
   }
 

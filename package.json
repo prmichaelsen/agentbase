@@ -1,9 +1,16 @@
 {
-  "name": "agentbase",
+  "name": "@prmichaelsen/agentbase",
   "version": "1.0.0",
   "description": "Instagram MCP server using Graph API v21.0",
   "type": "module",
   "main": "build/index.js",
+  "exports": {
+    ".": "./build/index.js",
+    "./factory": "./build/server-factory.js",
+    "./client": "./build/instagram-client.js",
+    "./tools": "./build/tools/index.js",
+    "./types": "./build/types.js"
+  },
   "scripts": {
     "build": "node esbuild.build.js",
     "watch": "node esbuild.watch.js",
@@ -12,9 +19,10 @@
   "keywords": [
     "mcp",
     "instagram",
-    "graph-api"
+    "graph-api",
+    "multi-tenant"
   ],
-  "author": "",
+  "author": "prmichaelsen",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.4"
