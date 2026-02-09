@@ -1,4 +1,8 @@
 import * as esbuild from 'esbuild';
+import { glob } from 'glob';
+
+// Get all tool files
+const toolFiles = glob.sync('src/tools/*.ts');
 
 // Build with bundling for the main entry point (CLI)
 await esbuild.build({
@@ -19,10 +23,11 @@ await esbuild.build({
   entryPoints: [
     'src/server-factory.ts',
     'src/instagram-client.ts',
-    'src/tools/index.ts',
-    'src/types.ts'
+    'src/types.ts',
+    ...toolFiles  // Include all individual tool files
   ],
   outdir: 'build',
+  outbase: 'src',  // Preserve directory structure
   platform: 'node',
   target: 'node18',
   format: 'esm',
