@@ -24,6 +24,14 @@
   ],
   "author": "prmichaelsen",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prmichaelsen/agentbase.git"
+  },
+  "bugs": {
+    "url": "https://github.com/prmichaelsen/agentbase/issues"
+  },
+  "homepage": "https://github.com/prmichaelsen/agentbase#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.4"
   },
