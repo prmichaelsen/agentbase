@@ -1,6 +1,6 @@
 {
   "name": "@prmichaelsen/agentbase",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Instagram MCP server using Graph API v21.0",
   "type": "module",
   "main": "build/index.js",
