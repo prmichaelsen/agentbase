@@ -4,15 +4,33 @@
   "description": "Instagram MCP server using Graph API v21.0",
   "type": "module",
   "main": "build/index.js",
+  "types": "build/index.d.ts",
   "exports": {
-    ".": "./build/index.js",
-    "./factory": "./build/server-factory.js",
-    "./client": "./build/instagram-client.js",
-    "./tools": "./build/tools/index.js",
-    "./types": "./build/types.js"
+    ".": {
+      "types": "./build/index.d.ts",
+      "import": "./build/index.js"
+    },
+    "./factory": {
+      "types": "./build/server-factory.d.ts",
+      "import": "./build/server-factory.js"
+    },
+    "./client": {
+      "types": "./build/instagram-client.d.ts",
+      "import": "./build/instagram-client.js"
+    },
+    "./tools": {
+      "types": "./build/tools/index.d.ts",
+      "import": "./build/tools/index.js"
+    },
+    "./types": {
+      "types": "./build/types.d.ts",
+      "import": "./build/types.js"
+    }
   },
   "scripts": {
-    "build": "node esbuild.build.js",
+    "build": "npm run build:types && npm run build:bundle",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:bundle": "node esbuild.build.js",
     "watch": "node esbuild.watch.js",
     "prepare": "npm run build"
   },
