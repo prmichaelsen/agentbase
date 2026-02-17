@@ -249,4 +249,61 @@ export class InstagramClient {
 
     return this.makeRequest(`/${mediaId}`, params, 'POST');
   }
+
+  async bulkModerateComments(
+    commentIds: string[],
+    action: 'reply' | 'delete' | 'hide' | 'unhide',
+    message?: string,
+    batchSize: number = 10,
+    delayMs: number = 1000
+  ): Promise<any[]> {
+    const results: any[] = [];
+    
+    // Process in batches to respect rate limits
+    for (let i = 0; i < commentIds.length; i += batchSize) {
+      const batch = commentIds.slice(i, i + batchSize);
+      
+      // Process batch in parallel
+      const batchPromises = batch.map(async (commentId) => {
+        try {
+          let result;
+          switch (action) {
+            case 'reply':
+              if (!message) {
+                throw new Error('Message is required for reply action');
+              }
+              result = await this.replyToComment(commentId, message);
+              return { comment_id: commentId, success: true, result };
+            case 'delete':
+              result = await this.deleteComment(commentId);
+              return { comment_id: commentId, success: true, result };
+            case 'hide':
+              result = await this.hideComment(commentId, true);
+              return { comment_id: commentId, success: true, result };
+            case 'unhide':
+              result = await this.hideComment(commentId, false);
+              return { comment_id: commentId, success: true, result };
+            default:
+              throw new Error(`Unknown action: ${action}`);
+          }
+        } catch (error) {
+          return {
+            comment_id: commentId,
+            success: false,
+            error: error instanceof Error ? error.message : String(error)
+          };
+        }
+      });
+      
+      const batchResults = await Promise.all(batchPromises);
+      results.push(...batchResults);
+      
+      // Delay between batches to avoid rate limits
+      if (i + batchSize < commentIds.length) {
+        await new Promise(resolve => setTimeout(resolve, delayMs));
+      }
+    }
+    
+    return results;
+  }
 }

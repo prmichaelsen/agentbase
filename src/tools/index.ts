@@ -23,3 +23,4 @@ export { replyToCommentTool, handleReplyToComment } from './reply-to-comment.js'
 export { deleteCommentTool, handleDeleteComment } from './delete-comment.js';
 export { hideCommentTool, handleHideComment } from './hide-comment.js';
 export { toggleCommentsTool, handleToggleComments } from './toggle-comments.js';
+export { moderateCommentsTool, handleModerateComments } from './moderate-comments.js';
