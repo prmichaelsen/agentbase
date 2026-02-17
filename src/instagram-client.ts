@@ -238,4 +238,15 @@ export class InstagramClient {
 
     return this.makeRequest(`/${commentId}`, params, 'POST');
   }
+
+  async toggleComments(
+    mediaId: string,
+    enabled: boolean
+  ): Promise<any> {
+    const params: Record<string, string> = {
+      comment_enabled: enabled.toString()
+    };
+
+    return this.makeRequest(`/${mediaId}`, params, 'POST');
+  }
 }
