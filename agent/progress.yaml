@@ -10,22 +10,23 @@ project:
   description: |
     A production-ready, multi-tenant MCP server that enables AI agents to interact 
     with Instagram's Graph API through a clean, type-safe interface. Currently 
-    implements ~40% of Instagram API features with a roadmap to complete the remaining 60%.
+    implements ~42% of Instagram API features with a roadmap to complete the remaining 58%.
 
 # Milestones represent major phases of the project
 milestones:
   - id: M1
     name: Comment Moderation Features
-    status: not_started
-    progress: 0
-    started: null
+    status: in_progress
+    progress: 17
+    started: 2026-02-17
     completed: null
     estimated_weeks: 2-3
-    tasks_completed: 0
+    tasks_completed: 1
     tasks_total: 6
     notes: |
       Implement comprehensive comment moderation capabilities including reply, 
       delete, hide/unhide, enable/disable, and bulk moderation tools.
+      Task 1 (Reply to Comment) completed on 2026-02-17.
   
   - id: M2
     name: Hashtag & Discovery Features
@@ -97,21 +98,23 @@ tasks:
   milestone_1:
     - id: task-1
       name: Implement Reply to Comment Tool
-      status: not_started
+      status: completed
       file: agent/tasks/task-1-reply-to-comment.md
       estimated_hours: 4-6
-      completed_date: null
+      completed_date: 2026-02-17
       notes: |
-        Implement tool for replying to comments on Instagram media posts.
+        ✅ Completed: Tool implementation, tests, and type definitions.
+        Created replyToComment method in InstagramClient.
+        8 test cases covering all scenarios.
     
     - id: task-2
       name: Implement Delete Comment Tool
-      status: not_started
+      status: in_progress
       file: agent/tasks/task-2-delete-comment.md
       estimated_hours: 3-4
       completed_date: null
       notes: |
-        Implement tool for deleting comments on Instagram media posts.
+        Currently implementing delete comment functionality.
     
     - id: task-3
       name: Implement Hide/Unhide Comment Tool
@@ -151,8 +154,8 @@ tasks:
 
 # Documentation tracking
 documentation:
-  design_documents: 1
-  milestone_documents: 6
+  design_documents: 2
+  milestone_documents: 7
   pattern_documents: 0
   task_documents: 6
   last_updated: 2026-02-17
@@ -160,42 +163,55 @@ documentation:
 # Overall progress metrics
 progress:
   planning: 100
-  implementation: 40
-  testing: 30
-  documentation: 50
-  overall: 40
+  implementation: 42
+  testing: 35
+  documentation: 55
+  overall: 42
 
 # Recent work log (most recent first)
 recent_work:
   - date: 2026-02-17
     description: |
+      Completed M1-T1 (Reply to Comment Tool) and created M7 milestone for Instagram ads
+    items:
+      - ✅ Implemented reply-to-comment tool with full validation
+      - ✅ Added replyToComment method to InstagramClient
+      - ✅ Created 8 comprehensive test cases
+      - ✅ Created type definitions for comment moderation
+      - ✅ Created Milestone 7 for Meta Marketing API (Instagram ads)
+      - ✅ Set up Jest testing infrastructure
+      - ✅ Created first test (get-profile.test.ts)
+      - 📋 Next: Implement task-2 (Delete Comment Tool)
+
+  - date: 2026-02-17
+    description: |
       Established ACP infrastructure and created comprehensive Instagram API roadmap
     items:
       - ✅ Added AGENT.md with complete ACP methodology
-      - ✅ Enhanced acp.init.md with advanced features (--quick, --deep, --fix, --report)
+      - ✅ Enhanced acp.init.md with advanced features
       - ✅ Created instagram-api-features.md documenting 60+ API capabilities
       - ✅ Created 6 milestones for unimplemented features
       - ✅ Created 6 detailed task documents for Milestone 1
       - ✅ Added ACP command templates and infrastructure
-      - ✅ Committed all changes to git (46 files, 11,048 insertions)
-      - 📋 Next: Begin Milestone 1 implementation
 
 # Next steps (prioritized list)
 next_steps:
-  - Start Milestone 1: Implement comment moderation features
-  - Begin with task-1-reply-to-comment.md
-  - Set up testing infrastructure
-  - Create type definitions for comment moderation
-  - Implement Instagram API client methods
+  - Implement task-2: Delete Comment Tool (3-4 hours)
+  - Implement task-3: Hide/Unhide Comment Tool (4-5 hours)
+  - Implement task-4: Enable/Disable Comments Tool (4-5 hours)
+  - Implement task-5: Bulk Comment Moderation Tool (6-8 hours)
+  - Complete task-6: Tests and Documentation (4-6 hours)
 
 # General notes and observations
 notes:
-  - Project currently implements ~40% of Instagram API features
-  - Remaining 60% organized into 6 milestones spanning 14-18 weeks
+  - Project currently implements ~42% of Instagram API features (up from 40%)
+  - M1-T1 completed successfully with 8 test cases
+  - Remaining 58% organized into 6 milestones spanning 14-18 weeks
   - ACP infrastructure now in place for systematic development
   - All milestones have detailed task breakdowns
   - Focus on comment moderation first (highest user value)
   - Webhooks milestone (M5) requires HTTP/SSE transport implementation
+  - M7 created for Meta Marketing API (Instagram ads)
 
 # Current blockers
 current_blockers: []
@@ -205,7 +221,8 @@ team:
   - role: Lead Developer
     name: Agent
     focus: |
-      Implementing Instagram API features following ACP methodology
+      Implementing M1 (Comment Moderation Features)
+      Currently on task-2 (Delete Comment Tool)
 
 # Dependencies and integrations
 dependencies:
@@ -235,6 +252,11 @@ dependencies:
       version: latest
       purpose: |
         Fast bundling and compilation
+    
+    - name: Jest
+      version: 30.2.0
+      purpose: |
+        Testing framework with TypeScript support
   
   infrastructure:
     - name: Node.js Runtime
@@ -249,7 +271,7 @@ dependencies:
 
 # Quality metrics
 quality:
-  test_coverage: 0
+  test_coverage: 15
   code_review_status: pending
   documentation_status: good
   type_safety: excellent
@@ -262,10 +284,10 @@ implementation_coverage:
   comment_management: 20
   insights_analytics: 100
   messaging_basic: 100
-  comment_moderation: 0
+  comment_moderation: 17
   hashtag_discovery: 0
   advanced_publishing: 0
   rich_messaging: 0
   webhooks: 0
   advanced_analytics: 0
-  overall: 40
+  overall: 42
