@@ -210,4 +210,15 @@ export class InstagramClient {
 
     return this.makeRequest(`/${userId}/messages`, params, 'POST');
   }
+
+  async replyToComment(
+    commentId: string,
+    message: string
+  ): Promise<any> {
+    const params: Record<string, string> = {
+      message
+    };
+
+    return this.makeRequest(`/${commentId}/replies`, params, 'POST');
+  }
 }

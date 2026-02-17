@@ -19,3 +19,4 @@ export {
 } from './get-conversations.js';
 export { sendMessageTool, handleSendMessage } from './send-message.js';
 export { callEndpointTool, handleCallEndpoint } from './call-endpoint.js';
+export { replyToCommentTool, handleReplyToComment } from './reply-to-comment.js';
