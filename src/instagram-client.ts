@@ -12,7 +12,7 @@ export class InstagramClient {
   async makeRequest<T>(
     endpoint: string,
     params: Record<string, string> = {},
-    method: 'GET' | 'POST' = 'GET'
+    method: 'GET' | 'POST' | 'DELETE' = 'GET'
   ): Promise<T> {
     const url = new URL(`${API_BASE_URL}${endpoint}`);
     
@@ -25,7 +25,7 @@ export class InstagramClient {
       for (const [key, value] of Object.entries(params)) {
         url.searchParams.append(key, value);
       }
-    } else if (method === 'POST') {
+    } else if (method === 'POST' || method === 'DELETE') {
       const formData = new URLSearchParams();
       formData.append('access_token', this.accessToken);
       for (const [key, value] of Object.entries(params)) {
@@ -220,5 +220,11 @@ export class InstagramClient {
     };
 
     return this.makeRequest(`/${commentId}/replies`, params, 'POST');
+  }
+
+  async deleteComment(
+    commentId: string
+  ): Promise<any> {
+    return this.makeRequest(`/${commentId}`, {}, 'DELETE');
   }
 }
