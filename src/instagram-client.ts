@@ -227,4 +227,15 @@ export class InstagramClient {
   ): Promise<any> {
     return this.makeRequest(`/${commentId}`, {}, 'DELETE');
   }
+
+  async hideComment(
+    commentId: string,
+    hide: boolean
+  ): Promise<any> {
+    const params: Record<string, string> = {
+      hide: hide.toString()
+    };
+
+    return this.makeRequest(`/${commentId}`, params, 'POST');
+  }
 }
