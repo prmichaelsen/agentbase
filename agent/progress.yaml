@@ -1,0 +1,271 @@
+# Project Progress Tracking
+# This file tracks the overall progress of the agentbase Instagram MCP server project
+
+project:
+  name: agentbase
+  version: 0.1.0
+  started: 2026-02-17
+  status: in_progress
+  current_milestone: M1
+  description: |
+    A production-ready, multi-tenant MCP server that enables AI agents to interact 
+    with Instagram's Graph API through a clean, type-safe interface. Currently 
+    implements ~40% of Instagram API features with a roadmap to complete the remaining 60%.
+
+# Milestones represent major phases of the project
+milestones:
+  - id: M1
+    name: Comment Moderation Features
+    status: not_started
+    progress: 0
+    started: null
+    completed: null
+    estimated_weeks: 2-3
+    tasks_completed: 0
+    tasks_total: 6
+    notes: |
+      Implement comprehensive comment moderation capabilities including reply, 
+      delete, hide/unhide, enable/disable, and bulk moderation tools.
+  
+  - id: M2
+    name: Hashtag & Discovery Features
+    status: not_started
+    progress: 0
+    started: null
+    completed: null
+    estimated_weeks: 2-3
+    tasks_completed: 0
+    tasks_total: 5
+    notes: |
+      Implement hashtag search and business discovery features for social listening 
+      and competitive analysis.
+  
+  - id: M3
+    name: Advanced Publishing Features
+    status: not_started
+    progress: 0
+    started: null
+    completed: null
+    estimated_weeks: 2-3
+    tasks_completed: 0
+    tasks_total: 5
+    notes: |
+      Enhance publishing capabilities with carousels, location tagging, product tags, 
+      branded content, and alt text support.
+  
+  - id: M4
+    name: Rich Messaging Features
+    status: not_started
+    progress: 0
+    started: null
+    completed: null
+    estimated_weeks: 3-4
+    tasks_completed: 0
+    tasks_total: 7
+    notes: |
+      Add rich messaging features including media attachments, quick replies, 
+      templates, ice breakers, and message reactions.
+  
+  - id: M5
+    name: Webhooks & Real-Time Events
+    status: not_started
+    progress: 0
+    started: null
+    completed: null
+    estimated_weeks: 3-4
+    tasks_completed: 0
+    tasks_total: 6
+    notes: |
+      Implement webhook support for real-time Instagram events. Requires HTTP/SSE 
+      transport (not stdio).
+  
+  - id: M6
+    name: Advanced Analytics Features
+    status: not_started
+    progress: 0
+    started: null
+    completed: null
+    estimated_weeks: 2-3
+    tasks_completed: 0
+    tasks_total: 6
+    notes: |
+      Add advanced analytics including follower demographics, video metrics, 
+      carousel per-slide analytics, and historical tracking.
+
+# Tasks are granular work items within milestones
+tasks:
+  milestone_1:
+    - id: task-1
+      name: Implement Reply to Comment Tool
+      status: not_started
+      file: agent/tasks/task-1-reply-to-comment.md
+      estimated_hours: 4-6
+      completed_date: null
+      notes: |
+        Implement tool for replying to comments on Instagram media posts.
+    
+    - id: task-2
+      name: Implement Delete Comment Tool
+      status: not_started
+      file: agent/tasks/task-2-delete-comment.md
+      estimated_hours: 3-4
+      completed_date: null
+      notes: |
+        Implement tool for deleting comments on Instagram media posts.
+    
+    - id: task-3
+      name: Implement Hide/Unhide Comment Tool
+      status: not_started
+      file: agent/tasks/task-3-hide-comment.md
+      estimated_hours: 4-5
+      completed_date: null
+      notes: |
+        Implement tool for hiding/unhiding comments (soft moderation).
+    
+    - id: task-4
+      name: Implement Enable/Disable Comments Tool
+      status: not_started
+      file: agent/tasks/task-4-toggle-comments.md
+      estimated_hours: 4-5
+      completed_date: null
+      notes: |
+        Implement tool for enabling/disabling comments on posts.
+    
+    - id: task-5
+      name: Implement Bulk Comment Moderation Tool
+      status: not_started
+      file: agent/tasks/task-5-bulk-moderation.md
+      estimated_hours: 6-8
+      completed_date: null
+      notes: |
+        Implement bulk moderation with rate limiting and batching logic.
+    
+    - id: task-6
+      name: Write Tests and Documentation
+      status: not_started
+      file: agent/tasks/task-6-tests-documentation.md
+      estimated_hours: 4-6
+      completed_date: null
+      notes: |
+        Comprehensive unit tests and documentation for all comment moderation tools.
+
+# Documentation tracking
+documentation:
+  design_documents: 1
+  milestone_documents: 6
+  pattern_documents: 0
+  task_documents: 6
+  last_updated: 2026-02-17
+
+# Overall progress metrics
+progress:
+  planning: 100
+  implementation: 40
+  testing: 30
+  documentation: 50
+  overall: 40
+
+# Recent work log (most recent first)
+recent_work:
+  - date: 2026-02-17
+    description: |
+      Established ACP infrastructure and created comprehensive Instagram API roadmap
+    items:
+      - ✅ Added AGENT.md with complete ACP methodology
+      - ✅ Enhanced acp.init.md with advanced features (--quick, --deep, --fix, --report)
+      - ✅ Created instagram-api-features.md documenting 60+ API capabilities
+      - ✅ Created 6 milestones for unimplemented features
+      - ✅ Created 6 detailed task documents for Milestone 1
+      - ✅ Added ACP command templates and infrastructure
+      - ✅ Committed all changes to git (46 files, 11,048 insertions)
+      - 📋 Next: Begin Milestone 1 implementation
+
+# Next steps (prioritized list)
+next_steps:
+  - Start Milestone 1: Implement comment moderation features
+  - Begin with task-1-reply-to-comment.md
+  - Set up testing infrastructure
+  - Create type definitions for comment moderation
+  - Implement Instagram API client methods
+
+# General notes and observations
+notes:
+  - Project currently implements ~40% of Instagram API features
+  - Remaining 60% organized into 6 milestones spanning 14-18 weeks
+  - ACP infrastructure now in place for systematic development
+  - All milestones have detailed task breakdowns
+  - Focus on comment moderation first (highest user value)
+  - Webhooks milestone (M5) requires HTTP/SSE transport implementation
+
+# Current blockers
+current_blockers: []
+
+# Team and contributors
+team:
+  - role: Lead Developer
+    name: Agent
+    focus: |
+      Implementing Instagram API features following ACP methodology
+
+# Dependencies and integrations
+dependencies:
+  external_services:
+    - name: Instagram Graph API
+      status: configured
+      notes: |
+        Access token configured via INSTAGRAM_ACCESS_TOKEN environment variable
+    
+    - name: Instagram Messaging API
+      status: configured
+      notes: |
+        Uses same access token as Graph API
+  
+  libraries:
+    - name: "@modelcontextprotocol/sdk"
+      version: latest
+      purpose: |
+        MCP protocol implementation
+    
+    - name: TypeScript
+      version: latest
+      purpose: |
+        Type-safe development
+    
+    - name: esbuild
+      version: latest
+      purpose: |
+        Fast bundling and compilation
+  
+  infrastructure:
+    - name: Node.js Runtime
+      status: ready
+      notes: |
+        Required for running the MCP server
+    
+    - name: Git Repository
+      status: ready
+      notes: |
+        Version control and collaboration
+
+# Quality metrics
+quality:
+  test_coverage: 0
+  code_review_status: pending
+  documentation_status: good
+  type_safety: excellent
+  
+# Implementation coverage
+implementation_coverage:
+  profile_management: 100
+  media_management: 100
+  content_publishing: 80
+  comment_management: 20
+  insights_analytics: 100
+  messaging_basic: 100
+  comment_moderation: 0
+  hashtag_discovery: 0
+  advanced_publishing: 0
+  rich_messaging: 0
+  webhooks: 0
+  advanced_analytics: 0
+  overall: 40
